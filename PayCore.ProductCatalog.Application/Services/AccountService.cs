@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PayCore.ProductCatalog.Application.Dto_Validator.Account.Dto;
+using PayCore.ProductCatalog.Application.Interfaces.Mail;
 using PayCore.ProductCatalog.Application.Interfaces.Services;
 using PayCore.ProductCatalog.Application.Interfaces.UnitOfWork;
 using PayCore.ProductCatalog.Domain.Entities;
@@ -20,7 +21,6 @@ namespace PayCore.ProductCatalog.Application.Services
         {
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
-
         }
 
         //GetAll
@@ -56,6 +56,7 @@ namespace PayCore.ProductCatalog.Application.Services
             var tempEntity = mapper.Map<AccountUpsertDto, Account>(dto);
             tempEntity.Password = tempEntity.Password.GetMd5Hash();
             await unitOfWork.Account.Create(tempEntity);
+            
         }
 
         //Remove

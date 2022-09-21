@@ -10,6 +10,7 @@ namespace PayCore.ProductCatalog.Application.IOC
     {
         public static void AddHangfireServices(this IServiceCollection services, IConfiguration Configuration)
         {
+            //Hangfire registration is done here
             services.AddHangfire(configuration => configuration
              .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
              .UseSimpleAssemblyNameTypeSerializer()
@@ -22,6 +23,7 @@ namespace PayCore.ProductCatalog.Application.IOC
              }));
 
             services.AddHangfireServer();
+
         }
     }
 }
