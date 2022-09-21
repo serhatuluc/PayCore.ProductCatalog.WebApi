@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PayCore.ProductCatalog.Application\PayCore.ProductCatalog.Application.csproj" />
     <ProjectReference Include="..\PayCore.ProductCatalog.Domain\PayCore.ProductCatalog.Domain.csproj" />
+    <ProjectReference Include="..\Paycore.ProductCatalog.Hangfire\Paycore.ProductCatalog.Hangfire.csproj" />
     <ProjectReference Include="..\PayCore.ProductCatalog.Infrastructure\PayCore.ProductCatalog.Infrastructure.csproj" />
     <ProjectReference Include="..\PayCore.ProductCatalog.Persistence\PayCore.ProductCatalog.Persistence.csproj" />
   </ItemGroup>

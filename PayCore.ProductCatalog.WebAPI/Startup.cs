@@ -1,3 +1,4 @@
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +30,7 @@ namespace PayCore.ProductCatalog.WebAPI
             services.AddApplicationServices(Configuration);
             services.AddInfrastructureServices(Configuration);
             services.AddPersistenceServices(Configuration);
+            services.AddHangfireServices(Configuration);
 
  
             services.AddSingleton<ILoggerManager, LoggerManager>();
@@ -58,6 +60,9 @@ namespace PayCore.ProductCatalog.WebAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //Hanfire dashboard
+            app.UseHangfireDashboard();
 
             app.UseEndpoints(endpoints =>
             {
