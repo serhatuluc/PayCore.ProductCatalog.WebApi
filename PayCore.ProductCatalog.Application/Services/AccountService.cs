@@ -83,7 +83,7 @@ namespace PayCore.ProductCatalog.Application.Services
                 throw new NotFoundException(nameof(Account), id);
             }
             tempentity.Email = dto.Email;
-            tempentity.Password = dto.Password;
+            tempentity.Password = dto.Password.GetMd5Hash();
             tempentity.Name = dto.Name;
             tempentity.UserName = dto.UserName;
             await unitOfWork.Account.Update(tempentity);

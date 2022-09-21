@@ -5,6 +5,7 @@ using PayCore.ProductCatalog.Application.Interfaces.UnitOfWork;
 using PayCore.ProductCatalog.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -179,16 +180,19 @@ namespace PayCore.ProductCatalog.Application.Services
         {
             var entity = await _unitOfWork.Product.GetById(productId);
 
+            //if product doesnt exist
             if(entity is null)
             {
                 throw new NotFoundException(nameof(Product), productId);
             }
 
+            //if product belongs to user
             if (entity.Owner.Id == userId)
             {
                 throw new BadRequestException("Product belongs to user");
             }
 
+            //If product is sold
             if(entity.IsSold == true)
             {
                 throw new BadRequestException("Product is sold");
@@ -198,6 +202,14 @@ namespace PayCore.ProductCatalog.Application.Services
             entity.Status = false;
             entity.IsOfferable = false;
             await _unitOfWork.Product.Update(entity);
+
+            //Since product is sold all other offers on this product  will be inactive. So status will be false
+            var allOffers = await _unitOfWork.Offer.GetAll();
+            var offersofProduct = allOffers.Where(x => x.Product.Id == productId);
+            foreach(var offer in offersofProduct)
+            {
+                offer.Status = false;
+            }
         }
     }
 }
