@@ -33,12 +33,6 @@ namespace PayCore.ProductCatalog.WebAPI.Controllers
         public async Task<TokenResponse> Login([FromBody] TokenRequest request)
         {
             var response = await tokenService.GenerateToken(request);
-
-            //After token is generated. Message sent to user email
-            var accounts = await accountService.GetAll();
-            var account = accounts.Where(x=>x.UserName == request.UserName).FirstOrDefault();
-            BackgroundJob.Schedule(() => _emailService.SendEmailAsync(new MailRequest { ToEmail = account.Email, From = account.Email, Subject = "Welcome", Body = "Hope. You enjoy your stay." }), TimeSpan.Zero);
-            
             return response;
         }
 

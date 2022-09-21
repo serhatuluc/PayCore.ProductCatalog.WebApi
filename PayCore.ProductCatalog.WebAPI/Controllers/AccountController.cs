@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PayCore.ProductCatalog.Application.Dto_Validator.Account.Dto;
 using PayCore.ProductCatalog.Application.Interfaces.Services;

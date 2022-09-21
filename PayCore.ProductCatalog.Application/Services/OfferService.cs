@@ -51,7 +51,7 @@ namespace PayCore.ProductCatalog.Application.Services
 
        
 
-        public async Task DisapproveOffer(int userId,int id)
+        public async Task DisapproveOffer(int id,int userId)
         {
             //It fetches offers to user
             var offers = await _unitOfWork.Offer.GetOfferstoUser(userId);
@@ -175,9 +175,14 @@ namespace PayCore.ProductCatalog.Application.Services
         //Insert
         public async Task OfferOnProduct(int userId,OfferUpsertDto dto)
         {
-            //To check if product is offerable
             var product = await _unitOfWork.Product.GetById(dto.ProductId);
-            if (product.IsOfferable == false || product.Owner.Id == userId)
+            if(product is null)
+            {
+                throw new NotFoundException(nameof(Product),dto.ProductId);
+            }
+
+            //To check if product is offerable
+            if (product.IsOfferable == false || product.Owner.Id == userId || product.Status == false)
             {
                 throw new BadRequestException("Product is not offerable");
             }
@@ -198,11 +203,25 @@ namespace PayCore.ProductCatalog.Application.Services
         //Update
         public async Task UpdateOffer(int userId,int offerId, OfferUpsertDto dto)
         {
-            var tempentity = await _unitOfWork.Offer.GetById(userId);
+            var tempentity = await _unitOfWork.Offer.GetById(offerId);
+            //If offer doesnt exist
             if (tempentity is null)
             {
-                throw new NotFoundException(nameof(Offer), userId);
+                throw new NotFoundException(nameof(Offer), offerId);
             }
+
+            //If offer doesnt belong to user
+            if(tempentity.Customer.Id != userId)
+            {
+                throw new BadRequestException("Not allowed");
+            }
+
+            //If product is not active or it is sold
+            if(tempentity.Product.Status == false || tempentity.Product.IsSold == true)
+            {
+                throw new BadRequestException("Product is sold");
+            }
+
             //Offered price is updated
             if (dto.OfferedPrice != tempentity.OfferedPrice)
                 tempentity.OfferedPrice = dto.OfferedPrice;
