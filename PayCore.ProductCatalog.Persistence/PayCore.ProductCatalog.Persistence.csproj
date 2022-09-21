@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NHibernate" Version="5.3.13" />
+    <PackageReference Include="Npgsql" Version="6.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PayCore.ProductCatalog.Application\PayCore.ProductCatalog.Application.csproj" />
+    <ProjectReference Include="..\PayCore.ProductCatalog.Domain\PayCore.ProductCatalog.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

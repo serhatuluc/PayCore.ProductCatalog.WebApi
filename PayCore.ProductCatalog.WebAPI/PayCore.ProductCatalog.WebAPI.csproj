@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PayCore.ProductCatalog.Application\PayCore.ProductCatalog.Application.csproj" />
+    <ProjectReference Include="..\PayCore.ProductCatalog.Domain\PayCore.ProductCatalog.Domain.csproj" />
+    <ProjectReference Include="..\PayCore.ProductCatalog.Infrastructure\PayCore.ProductCatalog.Infrastructure.csproj" />
+    <ProjectReference Include="..\PayCore.ProductCatalog.Persistence\PayCore.ProductCatalog.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
