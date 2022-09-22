@@ -140,49 +140,56 @@ namespace PayCore.ProductCatalog.Application.Services
         //Update
         public async Task Update(int productId, int userId,ProductUpsertDto dto)
         {
-            var tempentity = await _unitOfWork.Product.GetById(productId);
+            var product = await _unitOfWork.Product.GetById(productId);
+            if(product is null)
+            {
+                throw new NotFoundException(nameof(Product),productId);
+            }
             //If owner id and user id doest match
-            if(tempentity.Owner.Id != userId)
+            if(product.Owner.Id != userId)
             {
                 throw new BadRequestException("Not allowed");
             }
-            if (tempentity is null)
+            if (product is null)
             {
                 throw new NotFoundException(nameof(Product), productId);
             }
 
             //If product is sold
-            if(tempentity.IsSold == true)
+            if(product.IsSold == true)
             {
                 throw new BadRequestException("Product is sold");
             }
 
-            var tempEntity = _mapper.Map<ProductUpsertDto, Product>(dto);
+            product.ProductName = dto.ProductName;
+            product.Description = dto.Description;
+            product.IsOfferable = dto.IsOfferable;
+            product.Price = dto.Price;
 
             //Category id which is taken from dto is used to assign category to product 
-            tempEntity.Category = await _unitOfWork.Category.GetById(dto.CategoryId);
-            if (tempEntity.Category is null)
+            product.Category = await _unitOfWork.Category.GetById(dto.CategoryId);
+            if (product.Category is null)
             {
                 throw new NotFoundException(nameof(Category), dto.CategoryId);
             }
 
             //Brand id which is taken from dto is used to assign brand to product 
-            tempEntity.Brand = await _unitOfWork.Brand.GetById(dto.BrandId);
-            if (tempEntity.Brand is null)
+            product.Brand = await _unitOfWork.Brand.GetById(dto.BrandId);
+            if (product.Brand is null)
             {
                 throw new NotFoundException(nameof(Category), dto.BrandId);
             }
 
             //Color id which is taken from dto is used to assign color to product 
-            tempEntity.Color = await _unitOfWork.Color.GetById(dto.ColorId);
-            if (tempEntity.Color is null)
+            product.Color = await _unitOfWork.Color.GetById(dto.ColorId);
+            if (product.Color is null)
             {
                 throw new NotFoundException(nameof(Category), dto.ColorId);
             }
 
-            //Account id taken from jwt token is used to assignt the product to account
-            tempEntity.Owner = await _unitOfWork.Account.GetById(userId);
-            await _unitOfWork.Product.Update(tempentity);
+            //Account id taken from jwt token is used to assign the product to account
+
+            await _unitOfWork.Product.Update(product);
         }
 
 
