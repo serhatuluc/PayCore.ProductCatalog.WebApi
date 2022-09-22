@@ -26,9 +26,14 @@ Libraries     |
 ------------- | 
 FluentValidation |
 AutoMapper          | 
-Nhibernate    |
+NHibernate    |
 Hangfire    |
-Hangfire    | 
+SeriLog    | 
+Nunit    |
+Moq    |
+Mailkit    | 
+
+
 
 
                        
