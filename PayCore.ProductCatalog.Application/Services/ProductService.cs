@@ -5,7 +5,6 @@ using PayCore.ProductCatalog.Application.Interfaces.UnitOfWork;
 using PayCore.ProductCatalog.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -141,10 +140,21 @@ namespace PayCore.ProductCatalog.Application.Services
         //Update
         public async Task Update(int productId, int userId,ProductUpsertDto dto)
         {
-            var tempentity = await _unitOfWork.Offer.GetById(productId);
+            var tempentity = await _unitOfWork.Product.GetById(productId);
+            //If owner id and user id doest match
+            if(tempentity.Owner.Id != userId)
+            {
+                throw new BadRequestException("Not allowed");
+            }
             if (tempentity is null)
             {
                 throw new NotFoundException(nameof(Product), productId);
+            }
+
+            //If product is sold
+            if(tempentity.IsSold == true)
+            {
+                throw new BadRequestException("Product is sold");
             }
 
             var tempEntity = _mapper.Map<ProductUpsertDto, Product>(dto);
@@ -172,7 +182,7 @@ namespace PayCore.ProductCatalog.Application.Services
 
             //Account id taken from jwt token is used to assignt the product to account
             tempEntity.Owner = await _unitOfWork.Account.GetById(userId);
-            await _unitOfWork.Offer.Update(tempentity);
+            await _unitOfWork.Product.Update(tempentity);
         }
 
 
@@ -202,14 +212,6 @@ namespace PayCore.ProductCatalog.Application.Services
             entity.Status = false;
             entity.IsOfferable = false;
             await _unitOfWork.Product.Update(entity);
-
-            //Since product is sold all other offers on this product  will be inactive. So status will be false
-            var allOffers = await _unitOfWork.Offer.GetAll();
-            var offersofProduct = allOffers.Where(x => x.Product.Id == productId);
-            foreach(var offer in offersofProduct)
-            {
-                offer.Status = false;
-            }
         }
     }
 }
