@@ -71,7 +71,6 @@ In Onion Architecture, deeper the layer the fewer dependency it has. Deepest lay
 [<img src="https://miro.medium.com/max/640/1*0Pg6_UsaKiiEqUV3kf2HXg.png">](http://google.com.au/)
 
 
-
 **Domain layer**
 
 :arrow_right:Domain has no dependency. It holds application domain objects. Entities are placed here.
