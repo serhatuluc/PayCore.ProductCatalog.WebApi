@@ -28,7 +28,7 @@ namespace PayCore.ProductCatalog.WebAPI.Controllers
             this._emailService = emailService;
         }
 
-        [AutomaticRetry(Attempts = 5)]
+        
         [HttpPost("Login")]
         public async Task<TokenResponse> Login([FromBody] TokenRequest request)
         {
@@ -36,6 +36,7 @@ namespace PayCore.ProductCatalog.WebAPI.Controllers
             return response;
         }
 
+        [AutomaticRetry(Attempts = 5)]
         [HttpPost("register")]
         public virtual async Task<IActionResult> Create([FromBody] AccountUpsertDto dto)
         {

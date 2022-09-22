@@ -41,7 +41,7 @@ namespace PayCore.ProductCatalog.WebAPI.Controllers
             return Ok(result);
         }
 
-
+        [AutomaticRetry(Attempts = 5)]
         [HttpPost("offeronproduct")]
         public virtual async Task<IActionResult> Create([FromBody] OfferUpsertDto dto)
         {
@@ -71,6 +71,7 @@ namespace PayCore.ProductCatalog.WebAPI.Controllers
             return Ok();
         }
 
+        [AutomaticRetry(Attempts = 5)]
         [HttpPut("approveoffer")]
         public virtual async Task<IActionResult> ApproveOffer(int offerId)
         {
