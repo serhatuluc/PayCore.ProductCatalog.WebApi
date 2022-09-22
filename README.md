@@ -84,3 +84,5 @@ Migrations and database configuration is implemented in this layer. No bussiness
 Infrastructure Layer
 ------------------------------
 Log and email service is configured here. No bussiness logic is implemented.
+
+ 
