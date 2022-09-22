@@ -37,6 +37,9 @@ Mailkit    |
 <h2>Getting Started</h2>
 
 :one: Arrange NHibernate Configuration
+
+Change password and database name in configuration with your own settings
+
  ```"ConnectionStrings": {
     "PostgreSqlConnection": "User ID=postgres;Password=YourMasterPasswordForPostgre;Server=localhost;Port=5432;Database=YourDatabaseName;Integrated Security=true;Pooling=true;"
   }, ```
