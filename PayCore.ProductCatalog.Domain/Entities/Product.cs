@@ -17,6 +17,5 @@ namespace PayCore.ProductCatalog.Domain.Entities
         public virtual int Price { get; set; }
         public virtual IList<Offer> Offers { get; set; }
         public virtual bool Status { get; set; } = true;
-
     }
 }
