@@ -42,5 +42,12 @@ Change password and database name in configuration with your own settings
 
  ```"ConnectionStrings": {
     "PostgreSqlConnection": "User ID=postgres;Password=YourMasterPasswordForPostgre;Server=localhost;Port=5432;Database=YourDatabaseName;Integrated Security=true;Pooling=true;"
-  }, ```
-                       
+  },
+  ```
+
+:two: Adding Admin to database
+
+```mysql
+INSERT INTO account (id , name, username,email,password,role,lastactivity) 
+VALUES ( 1, 'Admin', 'Admin','Admin@gmail.com','e64b78fc3bc91bcbc7dc232ba8ec59e0','Admin','2022-09-17 21:53:16.2522')
+```
