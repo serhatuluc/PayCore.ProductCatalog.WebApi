@@ -77,10 +77,10 @@ Application layer
 ----------------------------
 Application layer holds interfaces and services. Bussiness logic is implemented in this layer. Service interface are kept seperate to ensure loose coupling.
 
-Persistence Layer
+Persistence Layer 
 ------------------------
-Migrations and database configuration is implemented in this class.
+Migrations and database configuration is implemented in this layer. No bussiness logic ismplemented
 
 Infrastructure Layer
----------------------
-
+------------------------------
+Log and email service is configured here. No bussiness logic is implemented.
