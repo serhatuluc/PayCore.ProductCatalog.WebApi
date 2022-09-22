@@ -79,7 +79,7 @@ Application layer holds interfaces and services. Bussiness logic is implemented 
 
 Persistence Layer 
 ------------------------
-Migrations and database configuration is implemented in this layer. No bussiness logic ismplemented
+Migrations and database configuration is implemented in this layer. No bussiness logic ismplemented. Only this layer knows database.
 
 Infrastructure Layer
 ------------------------------
