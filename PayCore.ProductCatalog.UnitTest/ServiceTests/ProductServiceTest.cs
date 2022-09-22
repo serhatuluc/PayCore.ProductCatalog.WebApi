@@ -101,21 +101,6 @@ namespace PayCore.ProductCatalog.UnitTest
 
 
 
-        [Test]
-        public void Update_Product_With_Wrong_Brand_Category_Color_Id_ReturnsNotFound()
-        {
-            //Arrange
-            _unitOfWork.Setup(u => u.Product).Returns(_productRepository.Object);
-            var dto = new ProductUpsertDto();
-            _unitOfWork.Setup(repo => repo.Offer.GetById(It.IsAny<int>())).ReturnsAsync((Offer)null);
-            _unitOfWork.Setup(repo => repo.Category.GetById(It.IsAny<int>())).ReturnsAsync((Category)null);
-            _unitOfWork.Setup(repo => repo.Brand.GetById(It.IsAny<int>())).ReturnsAsync((Brand)null);
-            _unitOfWork.Setup(repo => repo.Color.GetById(It.IsAny<int>())).ReturnsAsync((Color)null);
-            var productService = new ProductService(_mapper, _unitOfWork.Object);
-
-            //Act //Assert
-            Assert.Throws<NotFoundException>(() => productService.Update(It.IsAny<int>(), It.IsAny<int>(), dto).GetAwaiter().GetResult());
-        }
 
         [Test]
         public void Buy_Product_WithNonExistingItem_ReturnsNotFound()
