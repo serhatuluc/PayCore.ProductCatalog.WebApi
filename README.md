@@ -55,3 +55,9 @@ This is the information needed to log in as admin -> ``` UserName = Admin , Pass
 INSERT INTO account (id , name, username,email,password,role,lastactivity) 
 VALUES ( 1, 'Admin', 'Admin','Admin@gmail.com','e64b78fc3bc91bcbc7dc232ba8ec59e0','Admin','2022-09-17 21:53:16.2522')
 ```
+
+<h2>Structure of Project</h2>
+
+In this project, Onion Architecture has been applied as an example of Clean Archtitecture . Firstly, I should have to give credit [Güven Barış Çakan](https://github.com/guvenbaris) and his fellows [Kader Uzuner](https://github.com/KaderUzuner) and [Osman Mahmut Cepoğlu](https://github.com/osmanmahmutcepoglu) was an inspiration for
+me to prefer using Onion Architecture.
+
