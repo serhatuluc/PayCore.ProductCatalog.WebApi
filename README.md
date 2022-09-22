@@ -68,21 +68,24 @@ In Onion Architecture, deeper the layer the fewer dependency it has. Deepest lay
 
 
 
-Domain layer
---------------------------
-Domain has no dependency. It holds application domain objects. Entities are placed here.
+**Domain layer**
+
+:arrow_right:Domain has no dependency. It holds application domain objects. Entities are placed here.
 
 
-Application layer
-----------------------------
-Application layer holds interfaces and services. Bussiness logic is implemented in this layer. Service interface are kept seperate to ensure loose coupling.
+**Application layer**
 
-Persistence Layer 
-------------------------
-Migrations and database configuration is implemented in this layer. No bussiness logic ismplemented. Only this layer knows database.
+:arrow_right:Application layer holds interfaces and services. Bussiness logic is implemented in this layer. Service interface are kept seperate to ensure loose coupling.
 
-Infrastructure Layer
-------------------------------
-Log and email service is configured here. No bussiness logic is implemented.
+**Persistence Layer**
 
- 
+:arrow_right:Migrations and database configuration is implemented in this layer. No bussiness logic ismplemented. Only this layer knows database.
+
+**Infrastructure Layer**
+
+:arrow_right:Log and email service is configured here. No bussiness logic is implemented.
+
+
+<h2>ER Diagram</h2>
+
+![](screenshots/ER.png)
