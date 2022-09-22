@@ -12,6 +12,7 @@ The project has been created as a Final Project of  **Patika-PayCore .Net Bootca
 :arrow_right: User is allowed to buy a product without make an offer on it.
 
 :arrow_right: Users need to be registered to use web application.
+<br></br>
 
 
 <h2>Technologies</h2>
@@ -34,6 +35,7 @@ Moq    |
 Mailkit    | 
 
 
+<br></br>
 
 <h2>Getting Started</h2>
 
@@ -56,6 +58,7 @@ This is the information needed to log in as admin -> ``` UserName = Admin , Pass
 INSERT INTO account (id , name, username,email,password,role,lastactivity) 
 VALUES ( 1, 'Admin', 'Admin','Admin@gmail.com','e64b78fc3bc91bcbc7dc232ba8ec59e0','Admin','2022-09-17 21:53:16.2522')
 ```
+<br></br>
 
 <h2>Structure of Project</h2>
 
@@ -63,6 +66,7 @@ In this project, Onion Architecture has been applied as an example of Clean Arch
 me to prefer using Onion Architecture.
 
 In Onion Architecture, deeper the layer the fewer dependency it has. Deepest layer which is Domain has no dependency. The layer on Domain which is Application layer has dependency to damain. So outer layer are allowed to reference the layers that are directly below them.   
+<br></br>
 
 [<img src="https://miro.medium.com/max/640/1*0Pg6_UsaKiiEqUV3kf2HXg.png">](http://google.com.au/)
 
@@ -71,21 +75,30 @@ In Onion Architecture, deeper the layer the fewer dependency it has. Deepest lay
 **Domain layer**
 
 :arrow_right:Domain has no dependency. It holds application domain objects. Entities are placed here.
+<br></br>
 
 
 **Application layer**
 
 :arrow_right:Application layer holds interfaces and services. Bussiness logic is implemented in this layer. Service interface are kept seperate to ensure loose coupling.
+<br></br>
 
 **Persistence Layer**
 
 :arrow_right:Migrations and database configuration is implemented in this layer. No bussiness logic ismplemented. Only this layer knows database.
+<br></br>
 
 **Infrastructure Layer**
 
 :arrow_right:Log and email service is configured here. No bussiness logic is implemented.
 
+<br></br>
 
 <h2>ER Diagram</h2>
+:arrow_right: Both offer and product has Status field. Status field is true by default. If product is sold or offer is disapproved then status will be false. 
+It can be assumed as active and passive.
+
+<br></br>
+
 
 ![](screenshots/ER.png)
